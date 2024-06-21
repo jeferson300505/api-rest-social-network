@@ -1,14 +1,15 @@
-const mongoosee = require('mongoose');
+import { connect } from "mongoose";
 
-const connection = async()=>{
+const connection = async() => {
+
   try {
-    await mongoosee.connect('mongodb://localhost:27017/bd_socialnet')
-    console.log("listo :3")
+    await connect("mongodb://localhost:27017/bd_socialnet");
+    console.log("Conectado correctamente a la BD: bd_socialnet");
   } catch (error) {
-    console.log("no se conecto")
-    throw new error("no se ha podido conectar")
+    console.log(error);
+    throw new error("¡No se ha podido conectar a la base de datos!");
   }
 
 }
 
-module.exports = connection;
+export default connection;
