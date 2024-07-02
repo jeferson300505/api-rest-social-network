@@ -5,7 +5,7 @@ export const followUserIds = async (req, res) => {
     // Obtener el ID del usuario autenticado
     const identityUserId = req.user.userId;
 
-    // En caso de llegar el userID
+    // En caso de no llegar el userID
     if(!identityUserId) {
       return res.status(400).send({
         status: "error",
@@ -38,5 +38,33 @@ export const followUserIds = async (req, res) => {
       following: [],
       followers: []
     };
+  }
+}
+
+// Obtenemos los datos de UN usuario que me está siguiendo a mi o que yo sigo
+export const followThisUser = async (identityUserId, profileUserId) => {
+  try {
+    //Verificar si los IDs son válidos
+    if(!identityUserId || !profileUserId)
+      throw new Error("IDs de los usuarios son inválidos");
+
+    // Consultar si yo como usuario identificado (identityUserId) sigo al otro usuario (profileUserId)
+    const following = await Follow.findOne({"following_user": identityUserId, "followed_user": profileUserId});
+
+    // Consultar si el otro usuario (profileUserId) me sigue a mi o al usuario autenticado (identityUserId)
+    const follower = await Follow.findOne({"following_user": profileUserId, "followed_user": identityUserId});
+
+    return {
+      following,
+      follower
+    }
+
+  } catch (error) {
+    console.log("Error al obtener la información del usuario.", error);
+    // devuelve null si no se siguen
+    return {
+      following: null,
+      follower: null
+    }
   }
 }

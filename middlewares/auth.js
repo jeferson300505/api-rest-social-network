@@ -1,6 +1,6 @@
 import jwt from 'jwt-simple';
 import moment from 'moment';
-import { secret } from '../service/jwt.js';
+import { secret } from '../services/jwt.js';
 
 // Asegurar la autenticación
 export const ensureAuth = (req, res, next) => {
