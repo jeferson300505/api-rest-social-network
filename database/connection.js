@@ -1,9 +1,12 @@
 import { connect } from "mongoose";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const connection = async() => {
 
   try {
-    await connect("mongodb://localhost:27017/bd_socialnet");
+    await connect(process.env.MONGODB_URI);
     console.log("Conectado correctamente a la BD: bd_socialnet");
   } catch (error) {
     console.log(error);

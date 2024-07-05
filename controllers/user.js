@@ -316,7 +316,7 @@ export const updateUser = async (req, res) => {
   }
 }
 
-// Método para subir imágenes (AVATAR - img de perfil) y Actualizar la imagen de perfil
+//-- Método para subir imágenes (AVATAR - img de perfil) y Actualizar la imagen de perfil
 export const uploadFiles = async (req, res) => {
   try {
     // Recoger el archivo de imagen y comprobarmos que existe
