@@ -1,14 +1,11 @@
 import { connect } from "mongoose";
 import dotenv from "dotenv";
 
-dotenv.config();  // Carga las variables de entorno desde el archivo .env
+dotenv.config();
 
-const connection = async () => {
+const connection = async() => {
   try {
-    await connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,  // Opciones recomendadas para evitar warnings
-      useUnifiedTopology: true,
-    });
+    await connect(process.env.MONGODB_URI);
     console.log("Conectado correctamente a la BD: bd_socialnet");
   } catch (error) {
     console.error("Error al conectar a la base de datos", error);
